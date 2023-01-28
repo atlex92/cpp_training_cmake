@@ -22,3 +22,24 @@ private:
     std::vector<int> nums_;
     size_t k_{0u};
 };
+
+struct Task209 {
+/**
+ * Дан массив с положительными целыми числами произвольного размера, а также число целевое значение желаемой суммы summ.
+ * Необходимо посчитать минимальную длину последовательности в массиве, сумма элементов в которой будет >= summ.
+ * Если такой последовательности в массиве нет, нужно вернуть 0.
+ * https://leetcode.com/problems/minimum-size-subarray-sum/
+ */
+    void Setup(const std::vector<int>& input_num, const size_t summ) {
+        nums_ = input_num;
+        summ_ = summ;
+    }
+
+    size_t GetAnswer() const {
+        //  Измените реализацию задачи в этом методе
+        return 0u;
+    }
+private:
+    std::vector<int> nums_;
+    size_t summ_{0u};
+};
