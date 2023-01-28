@@ -3,7 +3,6 @@
 
 TEST(Task1004, Task1004) {
 	Task1004 task;
-
 	//  not initialized, zero length num array
 	EXPECT_EQ(0u, task.GetAnswer());
 
@@ -26,6 +25,10 @@ TEST(Task1004, Task1004) {
 	//  example from leetcode
 	task.Setup({ 0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1 }, 3u);
 	EXPECT_EQ(10u, task.GetAnswer());
+
+	//  example from my wife teacher Math Nadezhda
+	task.Setup({ 1,1,1,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,0,1,1,1,1,0,0,1,1,1,1 }, 3u);
+	EXPECT_EQ(15u, task.GetAnswer());
 }
 
 TEST(Task209, Task209) {
