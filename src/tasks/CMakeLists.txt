@@ -1,0 +1,2 @@
+add_library(tasks INTERFACE)
+target_include_directories(tasks INTERFACE include)
