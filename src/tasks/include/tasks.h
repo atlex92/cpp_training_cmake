@@ -15,10 +15,40 @@ struct Task1004 {
     }
 
     size_t GetAnswer() const {
-        //  Измените реализацию задачи в этом методе
-        return 0u;
+        size_t ret{0u};
+        for (size_t start_index{0u}; start_index < nums_.size();) {
+
+            const auto subarray_solution{FindMaxLenAndFirstZeroFromIndex(start_index)};
+            const auto subarray_length{subarray_solution.first};
+            start_index = subarray_solution.second + 1u;
+            if(subarray_length > ret) {
+                ret = subarray_length;
+            }
+        }
+        return ret;
     }
 private:
+    std::pair<size_t, size_t> FindMaxLenAndFirstZeroFromIndex(const size_t start_index) const {
+        size_t max_len{0u};
+        size_t first_zero_index{start_index};
+        size_t replacings_left{k_};
+
+        for (size_t i{start_index}; i < nums_.size(); i++) {
+            if(0u == nums_[i]) {
+                if(start_index == first_zero_index) {
+                    first_zero_index = i;
+                }
+                if(0u == replacings_left) {
+                    break;
+                }
+                else {
+                    replacings_left--;
+                }
+            }
+            max_len++;
+        }
+        return std::make_pair(max_len, first_zero_index);
+    }
     std::vector<int> nums_;
     size_t k_{0u};
 };
