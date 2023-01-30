@@ -9,7 +9,7 @@ struct Task1004 {
  * с учетом, что можно заменять встречающиеся '0' не более k раз.
  * https://leetcode.com/problems/max-consecutive-ones-iii/
  */
-    void Setup(const std::vector<int>& input_num, const size_t k) {
+    void Setup(const std::vector<int>& input_num, const int k) {
         nums_ = input_num;
         k_ = k;
     }
@@ -50,7 +50,7 @@ private:
         return std::make_pair(max_len, first_zero_index);
     }
     std::vector<int> nums_;
-    size_t k_{0u};
+    int k_;
 };
 
 struct Task209 {
