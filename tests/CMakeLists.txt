@@ -12,7 +12,7 @@ target_link_libraries(GTest::GTest INTERFACE gtest_main)
 add_executable(tasks_test main.cpp)
 
 target_link_libraries(tasks_test
- PRIVATE
+  PRIVATE
   GTest::GTest
   tasks)
 
