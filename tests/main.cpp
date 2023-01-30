@@ -31,7 +31,7 @@ TEST(Task1004, Task1004) {
 	EXPECT_EQ(15, task.GetAnswer());
 }
 
-/*TEST(Task209, Task209) {
+TEST(Task209, Task209) {
 	Task209 task;
 
 	//  not initialized, zero length num array
@@ -48,7 +48,7 @@ TEST(Task1004, Task1004) {
 	//  example from leetcode
 	task.Setup({ 1,1,1,1,1,1,1,1 }, 11u);
 	EXPECT_EQ(0u, task.GetAnswer());
-}*/
+}
 
 int main(int argc, char** argv) {
 
