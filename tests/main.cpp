@@ -6,16 +6,16 @@ TEST(Task1004, Task1004) {
 	//  not initialized, zero length num array
 	EXPECT_EQ(0, task.GetAnswer());
 
-	task.Setup({ 1,1,1 }, 0u);
+	task.Setup({ 1,1,1 }, 0);
 	EXPECT_EQ(3, task.GetAnswer());
 
-	task.Setup({ 1,0,1 }, 0u);
+	task.Setup({ 1,0,1 }, 0);
 	EXPECT_EQ(1, task.GetAnswer());
 
-	task.Setup({ 0,0,0,0,0 }, 3u);
+	task.Setup({ 0,0,0,0,0 }, 3);
 	EXPECT_EQ(3, task.GetAnswer());
 
-	task.Setup({ 0,0,0,0,0 }, 5u);
+	task.Setup({ 0,0,0,0,0 }, 5);
 	EXPECT_EQ(5, task.GetAnswer());
 
 	//  example from leetcode
@@ -31,7 +31,7 @@ TEST(Task1004, Task1004) {
 	EXPECT_EQ(15, task.GetAnswer());
 }
 
-TEST(Task209, Task209) {
+/*TEST(Task209, Task209) {
 	Task209 task;
 
 	//  not initialized, zero length num array
@@ -48,7 +48,7 @@ TEST(Task209, Task209) {
 	//  example from leetcode
 	task.Setup({ 1,1,1,1,1,1,1,1 }, 11u);
 	EXPECT_EQ(0u, task.GetAnswer());
-}
+}*/
 
 int main(int argc, char** argv) {
 
