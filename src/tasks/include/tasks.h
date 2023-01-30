@@ -26,7 +26,7 @@ struct Task1004 {
         for (right; right < nums_.size(); ++right) {
             if (nums_[right] == 0)
                 flips_left--;
-            while (k_ < 0) {
+            while (flips_left < 0) {
                 if (nums_[left] == 0)
                     flips_left++;
                 left++;
