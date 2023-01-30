@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstddef>
 #include <vector>
 
 struct Task1004 {
@@ -15,7 +14,7 @@ struct Task1004 {
         k_ = k;
     }
 
-    int GetAnswer() {
+    int GetAnswer() const {
         //  Измените реализацию задачи в этом методе
         return 0;
     }
