@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <vector>
+#include <limits>
 
 struct Task1004 {
 /**
@@ -10,18 +11,34 @@ struct Task1004 {
  * с учетом, что можно заменять встречающиеся '0' не более k раз.
  * https://leetcode.com/problems/max-consecutive-ones-iii/
  */
-    void Setup(const std::vector<int>& input_num, const size_t k) {
+    void Setup(const std::vector<int>& input_num, const int k) {
         nums_ = input_num;
         k_ = k;
     }
 
-    size_t GetAnswer() const {
-        //  Измените реализацию задачи в этом методе
-        return 0u;
+    int GetAnswer()  {
+        int left{0};
+        int right{0};
+        int res = std::numeric_limits<int>::min();
+
+        if (nums_.size() == 0)
+            return 0;
+
+        for (right; right < nums_.size(); ++right) {
+            if (nums_[right] == 0)
+                k_--;
+            while (k_ < 0) {
+                if (nums_[left] == 0)
+                    k_++;
+                left++;
+            }
+            res = std::max(res, right - left + 1);
+        }
+        return res; 
     }
 private:
     std::vector<int> nums_;
-    size_t k_{0u};
+    int k_;
 };
 
 struct Task209 {
