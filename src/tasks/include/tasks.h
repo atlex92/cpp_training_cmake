@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-
+#include <limits>
 struct Task1004 {
 /**
  * Дан массив произвольного размера, содержащий цифры '0' и '1', а также число k.
@@ -14,9 +14,10 @@ struct Task1004 {
         k_ = k;
     }
 
-    int GetAnswer()  {
+    int GetAnswer() const {
         int left{0};
         int right{0};
+        int flips_left{k_};
         int res = std::numeric_limits<int>::min();
 
         if (nums_.size() == 0)
@@ -24,10 +25,10 @@ struct Task1004 {
 
         for (right; right < nums_.size(); ++right) {
             if (nums_[right] == 0)
-                k_--;
+                flips_left--;
             while (k_ < 0) {
                 if (nums_[left] == 0)
-                    k_++;
+                    flips_left++;
                 left++;
             }
             res = std::max(res, right - left + 1);
@@ -37,7 +38,7 @@ struct Task1004 {
     
 private:
     std::vector<int> nums_;
-    size_t k_{0u};
+    int k_{0};
 };
 
 /*struct Task209 {
