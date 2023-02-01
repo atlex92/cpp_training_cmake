@@ -32,7 +32,7 @@ TEST(Task1004, Task1004) {
 	EXPECT_EQ(15, task.GetAnswer());
 }
 
-/*TEST(Task209, Task209) {
+TEST(Task209, Task209) {
 	Task209 task;
 
 	//  not initialized, zero length num array
@@ -42,6 +42,16 @@ TEST(Task1004, Task1004) {
 	task.Setup({0}, 0u);
 	EXPECT_EQ(1u, task.GetAnswer());
 
+	task.Setup({1,2}, 3u);
+	EXPECT_EQ(2u, task.GetAnswer());
+
+	task.Setup({7}, 7u);
+	EXPECT_EQ(1u, task.GetAnswer());
+
+	//  all elements == 0, so no change to get summ == 1
+	task.Setup({0,0,0,0,0}, 1u);
+	EXPECT_EQ(0u, task.GetAnswer());
+
 	//  example from leetcode
 	task.Setup({ 2,3,1,2,4,3 }, 7u);
 	EXPECT_EQ(2u, task.GetAnswer());
@@ -49,7 +59,7 @@ TEST(Task1004, Task1004) {
 	//  example from leetcode
 	task.Setup({ 1,1,1,1,1,1,1,1 }, 11u);
 	EXPECT_EQ(0u, task.GetAnswer());
-}*/
+}
 
 int main(int argc, char** argv) {
 
