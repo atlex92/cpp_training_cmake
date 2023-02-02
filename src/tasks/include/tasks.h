@@ -33,12 +33,13 @@ struct Task1004 {
             }
             res = std::max(res, right - left + 1);
         }
-        return res; 
+        return res;
     }
     
 private:
     std::vector<int> nums_;
     int k_{0};
+
 };
 
 /*struct Task209 {
