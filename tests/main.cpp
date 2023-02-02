@@ -4,6 +4,7 @@
 TEST(Task1004, Task1004) {
 	Task1004 task;
 	//  not initialized, zero length num array
+
 	task.Setup({0}, 0);
 	EXPECT_EQ(0, task.GetAnswer());
 
@@ -59,6 +60,12 @@ TEST(Task209, Task209) {
 	//  example from leetcode
 	task.Setup({ 1,1,1,1,1,1,1,1 }, 11u);
 	EXPECT_EQ(0u, task.GetAnswer());
+
+	task.Setup({ 5,1,7,2,4,2,3,6 }, 9u);
+	EXPECT_EQ(2u, task.GetAnswer());
+
+	task.Setup({ 5,1,7,2,4,2,3,6 }, 13u);
+	EXPECT_EQ(3u, task.GetAnswer());
 }
 
 int main(int argc, char** argv) {

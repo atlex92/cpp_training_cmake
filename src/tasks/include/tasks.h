@@ -35,12 +35,17 @@ struct Task1004 {
             }
             res = std::max(res, right_border - left_border + 1);
         }
+<<<<<<< HEAD
        return res; 
+=======
+        return res;
+>>>>>>> d540943ef78e946f5c03b1d73f6880a021b98828
     }
     
 private:
     std::vector<int> nums_;
     int k_{0};
+
 };
 
 struct Task209 {
