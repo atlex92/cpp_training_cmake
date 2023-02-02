@@ -20,7 +20,7 @@ TEST(Task1004, Task1004) {
 	EXPECT_EQ(5, task.GetAnswer());
 
 	//  example from leetcode
-	task.Setup({ 1,1,1,0,0,0,1,1,1,1,0 }, 2u);
+	task.Setup({ 1,1,1,0,0,0,1,1,1,1,0 }, 2);
 	EXPECT_EQ(6, task.GetAnswer());
 
 	//  example from leetcode
