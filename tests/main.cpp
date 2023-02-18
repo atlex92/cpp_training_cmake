@@ -1,6 +1,7 @@
 #include <tasks.h>
 #include <gtest/gtest.h>
 
+using namespace std;
 TEST(Task1004, Task1004) {
 	Task1004 task;
 
@@ -44,6 +45,14 @@ TEST(Task209, Task209) {
 	//  example from leetcode
 	EXPECT_EQ(3u, task.minSubArrayLen(11, { 1,2,3,4,5 }));
 	
+}
+
+TEST(Task1109, Task1109) {
+	Task1109 task;
+	//  example from leetcode
+	EXPECT_EQ((vector<int>{10,55,45,25,25}), (task.corpFlightBookings({{1,2,10},{2,3,20},{2,5,25}}, 5)));
+	//  example from leetcode
+	EXPECT_EQ((vector<int>{10,25}), (task.corpFlightBookings({{1,2,10},{2,2,15}}, 2)));
 }
 
 int main(int argc, char** argv) {

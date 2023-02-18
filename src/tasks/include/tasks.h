@@ -94,3 +94,39 @@ struct Task209 {
         return ret;
     }
 };
+
+struct Task1109 {
+/**
+ * There are n flights that are labeled from 1 to n.
+
+ * You are given an array of flight bookings bookings, where bookings[i] = [firsti, lasti, seatsi] represents
+ * a booking for flights firsti through lasti (inclusive) with seatsi seats reserved for each flight in the range.
+
+ * Return an array answer of length n, where answer[i] is the total number of seats reserved for flight i.
+ * https://leetcode.com/problems/corporate-flight-bookings/
+ */
+    enum BookingFieldPositionE{
+        POS_FLIGHT_FROM = 0u,
+        POS_FLIGHT_TO,
+        POS_SEATS,
+    };
+
+    vector<int> corpFlightBookings(const vector<vector<int>>& bookings, int n) {
+        vector<int> ret(n, 0u);
+        for(const auto& booking : bookings) {
+            const auto first{booking[POS_FLIGHT_FROM]};
+            const auto last{booking[POS_FLIGHT_TO]};
+            const auto seats{booking[POS_SEATS]};
+            ret[first - 1u] += seats;
+            if(last < n) {
+                ret[last] -= seats;
+            }
+        }
+
+        for (size_t i = 1; i < n; i++) {
+            ret[i] += ret[i - 1u];
+        }        
+
+        return ret;
+    }
+};
