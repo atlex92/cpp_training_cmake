@@ -2,6 +2,9 @@
 
 #include <vector>
 #include <iostream>
+#include <queue>
+
+using namespace std;
 struct Task1004 {
 /**
  * Дан массив произвольного размера, содержащий цифры '0' и '1', а также число k.
@@ -9,49 +12,32 @@ struct Task1004 {
  * с учетом, что можно заменять встречающиеся '0' не более k раз.
  * https://leetcode.com/problems/max-consecutive-ones-iii/
  */
-    void Setup(const std::vector<int>& input_num, const int k) {
-        nums_ = input_num;
-        k_ = k;
-    }
+    int longestOnes(vector<int> nums, int k) {
+        int ret{};
 
-    int GetAnswer() const {
-        size_t ret{0u};
-        for (size_t start_index{0u}; start_index < nums_.size();) {
+        size_t left_border{};
+        size_t right_border{};
+        const size_t last_element{nums.size()};
+        queue<size_t> zero_index_queue{};
+        int frame_length{};
 
-            const auto subarray_solution{FindMaxLenAndFirstZeroFromIndex(start_index)};
-            const auto subarray_length{subarray_solution.first};
-            start_index = subarray_solution.second + 1u;
-            if(subarray_length > ret) {
-                ret = subarray_length;
+        while((right_border < last_element) && (ret < frame_length + (last_element - right_border))) {
+            if(0u == nums[right_border]) {
+                zero_index_queue.push(right_border);
+                if(zero_index_queue.size() > k) {
+                    left_border = zero_index_queue.front();
+                    zero_index_queue.pop();
+                    left_border++;
+                    // cout << "reset, " << "left_border = " << left_border << endl;
+                }
             }
+            frame_length = right_border - left_border + 1u;
+            ret = max(ret, frame_length);
+            ++right_border;
         }
+
         return ret;
     }
-private:
-    std::pair<int, size_t> FindMaxLenAndFirstZeroFromIndex(const size_t start_index) const {
-        int max_len{0u};
-        size_t first_zero_index{start_index};
-        int replacings_left{k_};
-
-        for (size_t i{start_index}; i < nums_.size(); i++) {
-            if(0u == nums_[i]) {
-                if(start_index == first_zero_index) {
-                    first_zero_index = i;
-                }
-                if(0u == replacings_left) {
-                    break;
-                }
-                else {
-                    replacings_left--;
-                }
-            }
-            max_len++;
-        }
-        return std::make_pair(max_len, first_zero_index);
-    }
-
-    std::vector<int> nums_;
-    int k_;
 };
 
 struct Task209 {
@@ -61,40 +47,50 @@ struct Task209 {
  * Если такой последовательности в массиве нет, нужно вернуть 0.
  * https://leetcode.com/problems/minimum-size-subarray-sum/
  */
-    void Setup(const std::vector<int>& input_num, const size_t summ) {
-        nums_ = input_num;
-        summ_ = summ;
-    }
+    int minSubArrayLen(const int& target, const vector<int>& nums) {
+        size_t ret{0u};
 
-    size_t GetAnswer() const {
-        size_t ret{0u};
-        for(size_t i{}; i < nums_.size(); i++) {
-            const size_t sub_array_length{GetSubArrayLengthFromIndex(i)};
-            const bool is_any_answer_found{ret != 0u};
-            const bool is_better_answer_found{(sub_array_length < ret) && (sub_array_length != 0u)};
-            if(is_better_answer_found || !is_any_answer_found) {
-                ret = sub_array_length;
-            }
-            if(kMinPossibleLength == ret) {
-                break;
+        if(!nums.empty()) {
+            int summ{nums[0]};
+            size_t left_border{};
+            size_t right_border{};
+            const size_t last_element_index{nums.size() - 1u};
+
+            while((left_border <= last_element_index) && (right_border <= last_element_index)) {
+                if(summ >= target) {
+                    const size_t len{(right_border - left_border + 1u)};
+                    if(ret == 0 || len < ret) {
+                        ret = len;
+                    }
+
+                    if(ret == 1) {
+                        break;
+                    }
+            
+                    if((left_border != right_border) && (summ != target)) {
+                        summ -= nums[left_border];
+                        ++left_border;
+                    }
+                    else if((left_border + 2u) < last_element_index) {
+                        summ -= (nums[left_border] + nums[left_border + 1]);
+                        ++right_border;
+                        summ += nums[right_border];
+                        left_border += 2u;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                else {
+                    if(++right_border <= last_element_index) {
+                        summ += nums[right_border];
+                    }
+                    else {
+                        break;
+                    }
+                }
             }
         }
         return ret;
     }
-private:
-    size_t GetSubArrayLengthFromIndex(const size_t index) const {
-        size_t ret{0u};
-        size_t summ{0u};
-        for(size_t i{index}; i < nums_.size(); i++) {
-            summ += nums_[i];
-            if(summ >= summ_) {
-                ret = (i - index + 1u);
-                break;
-            }
-        }
-        return ret;
-    }
-    std::vector<int> nums_;
-    size_t summ_{0u};
-    static constexpr size_t kMinPossibleLength{1u}; 
 };
