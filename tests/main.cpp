@@ -55,6 +55,26 @@ TEST(Task1109, Task1109) {
 	EXPECT_EQ((vector<int>{10,25}), (task.corpFlightBookings({{1,2,10},{2,2,15}}, 2)));
 }
 
+TEST(Task141, Task141) {
+	Task141 task;
+	//  example from leetcode
+	ListNode n1{3};
+	ListNode n2{2};
+	ListNode n3{0};
+	ListNode n4{-4};
+	n1.next = &n2;
+	n2.next = &n3;
+	n3.next = &n4;
+	n4.next = &n2;
+	EXPECT_TRUE(task.hasCycle(&n2));
+
+	n2.next = &n1;
+	EXPECT_TRUE(task.hasCycle(&n1));
+
+	n1.next = nullptr;
+	EXPECT_FALSE(task.hasCycle(&n1));
+}
+
 int main(int argc, char** argv) {
 
     ::testing::InitGoogleTest(&argc, argv);

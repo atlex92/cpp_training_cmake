@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <queue>
+#include <set>
 
 using namespace std;
 struct Task1004 {
@@ -126,6 +127,50 @@ struct Task1109 {
         for (size_t i = 1; i < n; i++) {
             ret[i] += ret[i - 1u];
         }        
+
+        return ret;
+    }
+};
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+struct Task141 {
+/**
+Given head, the head of a linked list, determine if the linked list has a cycle in it.
+
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously
+following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to.
+Note that pos is not passed as a parameter.
+
+Return true if there is a cycle in the linked list. Otherwise, return false.
+https://leetcode.com/problems/linked-list-cycle/
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+
+    bool hasCycle(ListNode *head) {
+        bool ret{false};
+        ListNode* slow{head}, *fast{head};
+
+        while(fast != nullptr && fast->next != nullptr) {
+            fast = fast->next->next;
+            slow = slow->next;
+
+            if(slow == fast) {
+                ret = true;
+                break;
+            }
+        }
 
         return ret;
     }
