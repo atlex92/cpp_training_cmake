@@ -4,6 +4,8 @@
 #include <iostream>
 #include <queue>
 #include <set>
+#include <stack>
+#include <algorithm>
 
 using namespace std;
 struct Task1004 {
@@ -135,7 +137,9 @@ struct Task1109 {
 struct ListNode {
     int val;
     ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 struct Task141 {
 /**
@@ -170,6 +174,93 @@ https://leetcode.com/problems/linked-list-cycle/
                 ret = true;
                 break;
             }
+        }
+
+        return ret;
+    }
+};
+
+struct Task206 {
+/**
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+https://leetcode.com/problems/reverse-linked-list/
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev{nullptr};
+        ListNode* curr{head};
+        ListNode* next{nullptr};
+
+        while(curr != nullptr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }        
+
+        return prev;
+    }
+};
+
+struct Task704 {
+/**
+Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums.
+If target exists, then return its index. Otherwise, return -1.
+
+You must write an algorithm with O(log n) runtime complexity.
+https://leetcode.com/problems/binary-search/
+*/
+
+    int search(const vector<int>& nums, int target) {
+        int ret{-1};
+        
+        auto res = bin_search(nums.begin(), nums.end(), target);
+
+        if(res != nums.end()) {
+            // cout << "res = " << *res << endl;
+            ret = distance(nums.begin(), res);
+        }
+        return ret;
+    }
+
+private:
+    vector<int>::const_iterator bin_search(vector<int>::const_iterator start, vector<int>::const_iterator end, const int target) {
+        auto ret{end};
+        const auto len{std::distance(start, end)};
+
+        // cout << "searching from " << *start << " with length = " << len << endl;
+
+        if(len > 3u) {
+            auto middle{start + len / 2};
+            if(target == *middle){
+                ret = middle;
+            }
+            else if (*middle > target){
+                auto tmp{bin_search(start, middle, target)};
+                if(tmp != middle) {
+                    ret = tmp;
+                }
+            }
+            else {
+                auto tmp{bin_search(middle, end, target)};
+                if(tmp != middle) {
+                    ret = tmp;
+                }
+            }
+        }
+        else {
+            ret = std::find(start, end, target);
+            // cout << __LINE__ << ": " << "ret = " << *ret << endl;
         }
 
         return ret;

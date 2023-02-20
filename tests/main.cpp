@@ -75,6 +75,13 @@ TEST(Task141, Task141) {
 	EXPECT_FALSE(task.hasCycle(&n1));
 }
 
+TEST(Task704, Task704) {	
+	Task704 task;
+	//  example from leetcode
+	EXPECT_EQ(4, task.search({-1,0,3,5,9,12}, 9));
+	EXPECT_EQ(-1, task.search({-1,0,3,5,9,1}, 2));
+}
+
 int main(int argc, char** argv) {
 
     ::testing::InitGoogleTest(&argc, argv);
