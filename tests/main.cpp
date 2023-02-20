@@ -82,6 +82,15 @@ TEST(Task704, Task704) {
 	EXPECT_EQ(-1, task.search({-1,0,3,5,9,1}, 2));
 }
 
+TEST(Task153, Task153) {	
+	Task153 task;
+	//  example from leetcode
+	EXPECT_EQ(1, task.findMin({3,4,5,1,2}));
+	EXPECT_EQ(0, task.findMin({4,5,6,7,0,1,2}));
+	EXPECT_EQ(11, task.findMin({11,13,15,17}));
+	EXPECT_EQ(11, task.findMin({11,13,15,17}));
+}
+
 int main(int argc, char** argv) {
 
     ::testing::InitGoogleTest(&argc, argv);
